@@ -17,7 +17,7 @@
             // Redirect based on the platform
             if (/android/i.test(userAgent)) {
                 window.location.href = playStoreUrl;
-            } else if (/iPad|iPhone|mac|iPod/.test(userAgent) && !window.MSStream) {
+            } else if (/iPad|iPhone|mac|Mac|iPod/.test(userAgent) && !window.MSStream) {
                 window.location.href = appStoreUrl;
             } else {
                 // Optionally handle other platforms or show a message
