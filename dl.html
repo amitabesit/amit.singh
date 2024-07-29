@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to App Store</title>
+    <script>
+        function redirectToAppStore() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // URL to your app on Google Play Store
+            var playStoreUrl = "https://play.google.com/store/apps/details?id=com.zupee.free&hl=en_IN";
+
+            // URL to your app on Apple App Store
+            var appStoreUrl = "https://apps.apple.com/in/app/zupee-play-ludo-game-online/id1576310504";
+
+            // Redirect based on the platform
+            if (/android/i.test(userAgent)) {
+                window.location.href = playStoreUrl;
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = appStoreUrl;
+            } else {
+                // Optionally handle other platforms or show a message
+                window.location.href = playStoreUrl; // Fallback or choose accordingly
+            }
+        }
+
+        // Redirect as soon as the page loads
+        window.onload = redirectToAppStore;
+    </script>
+</head>
+<body>
+<p>If you are not redirected, <a href="#" onclick="redirectToAppStore();">click here</a>.</p>
+</body>
+</html>
