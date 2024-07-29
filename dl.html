@@ -18,13 +18,13 @@
             // Redirect based on the platform
             if (/android/i.test(userAgent)) {
                 a = "play"
-                window.alert("Android - " + playStoreUrl);
+                // window.alert("Android - " + playStoreUrl);
                 window.location.href = playStoreUrl;
             } else if (/iPad|iPhone|mac|Mac|iPod/.test(userAgent) && !window.MSStream) {
-                window.alert("iPad -" + appStoreUrl);
+                // window.alert("iPad -" + appStoreUrl);
                 window.location.href = appStoreUrl;
             } else {
-                window.alert("ELSE -" + playStoreUrl);
+                // window.alert("ELSE -" + playStoreUrl);
                 // Optionally handle other platforms or show a message
                 window.location.href = playStoreUrl; // Fallback or choose accordingly
             }
