@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Mi Store</title>
+    <script>
+        function openMiStore() {
+            // mimarket://details?id=in.ludo.supremegold
+            var miStoreUrl = "intent://mi-store#Intent;scheme=mimarket;package=in.ludo.supremegold;end";
+            var playStoreUrl = "https://play.google.com/store/apps/details?id=com.zupee.free";
+
+            var timeout;
+            var start = new Date().getTime();
+            var delay = 5000; // Time to wait for the app to open
+
+            window.location = miStoreUrl;
+
+            timeout = setTimeout(function() {
+                if (new Date().getTime() - start < delay) {
+                    window.location = playStoreUrl;
+                }
+            }, delay);
+        }
+
+        window.onload = openMiStore;
+    </script>
+</head>
+<body>
+<p>If you are not redirected, <a href="#" onclick="openMiStore();">click here</a>.</p>
+</body>
+</html>
