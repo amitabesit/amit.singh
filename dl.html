@@ -9,7 +9,7 @@
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             // URL to your app on Google Play Store
-            var playStoreUrl = "https://play.google.com/store/apps/details?id=com.zupee.free&hl=en_IN";
+            var playStoreUrl = "intent://#Intent;package=com.vivo.appstore;action=android.intent.action.MAIN;category=android.intent.category.DEFAULT;scheme=vivoMarket;end";
 
             // URL to your app on Apple App Store
             var appStoreUrl = "https://apps.apple.com/in/app/zupee-play-ludo-game-online/id1576310504";
@@ -18,13 +18,13 @@
             // Redirect based on the platform
             if (/android/i.test(userAgent)) {
                 a = "play"
-                window.alert("Android - " + playStoreUrl);
+                // window.alert("Android - " + playStoreUrl);
                 window.location.href = playStoreUrl;
             } else if (/iPad|iPhone|mac|Mac|iPod/.test(userAgent) && !window.MSStream) {
-                window.alert("iPad -" + appStoreUrl);
+                // window.alert("iPad -" + appStoreUrl);
                 window.location.href = appStoreUrl;
             } else {
-                window.alert("ELSE -" + playStoreUrl);
+                // window.alert("ELSE -" + playStoreUrl);
                 // Optionally handle other platforms or show a message
                 window.location.href = playStoreUrl; // Fallback or choose accordingly
             }
