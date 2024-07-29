@@ -14,18 +14,24 @@
             // URL to your app on Apple App Store
             var appStoreUrl = "https://apps.apple.com/in/app/zupee-play-ludo-game-online/id1576310504";
 
+            var a = "";
             // Redirect based on the platform
             if (/android/i.test(userAgent)) {
-                window.location.href = playStoreUrl;
+                // window.location.href = playStoreUrl;
+                a = "play"
             } else if (/iPad|iPhone|mac|Mac|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = appStoreUrl;
+                // window.location.href = appStoreUrl;
+                a = "mac"
             } else {
                 // Optionally handle other platforms or show a message
-                window.location.href = playStoreUrl; // Fallback or choose accordingly
+                // window.location.href = playStoreUrl; // Fallback or choose accordingly
+                a = "else Play"
             }
+            console.log(a)
         }
 
-        console.log(redirectToAppStore)
+        redirectToAppStore()
+        // console.log(redirectToAppStore)
         // Redirect as soon as the page loads
         // window.onload = redirectToAppStore;
     </script>
