@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Entropy Values</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Amit ABI TEST ......</h1>
+<h1>High Entropy Values</h1>
+<p>Fetching high entropy values for architecture and bitness...</p>
+<div id="output">
+    <p><strong>Architecture:</strong> <span id="architecture">Loading...</span></p>
+    <p><strong>Bitness:</strong> <span id="bitness">Loading...</span></p>
+</div>
+
+<script>
+    async function fetchAndDisplayHighEntropyValues() {
+        try {
+            // Check if the User Agent Data API is available
+            if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+                const highEntropyValues = await navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness']);
+
+                // Update the HTML with the fetched values
+                document.getElementById('architecture').textContent = highEntropyValues.architecture || 'Not available';
+                document.getElementById('bitness').textContent = highEntropyValues.bitness || 'Not available';
+            } else {
+                // Handle the case where the API is not available
+                document.getElementById('architecture').textContent = 'User Agent Data API not supported';
+                document.getElementById('bitness').textContent = 'User Agent Data API not supported';
+            }
+        } catch (error) {
+            // Handle any errors that occur during the fetch
+            document.getElementById('architecture').textContent = 'Error fetching data';
+            document.getElementById('bitness').textContent = 'Error fetching data';
+            console.error('Error fetching high entropy values:', error);
+        }
+    }
+
+    // Call the function to fetch and display the high entropy values
+    fetchAndDisplayHighEntropyValues();
+</script>
+</body>
+</html>
