@@ -17,23 +17,23 @@
             var a = "";
             // Redirect based on the platform
             if (/android/i.test(userAgent)) {
-                // window.location.href = playStoreUrl;
                 a = "play"
+                window.alert("Android - " + playStoreUrl);
+                window.location.href = playStoreUrl;
             } else if (/iPad|iPhone|mac|Mac|iPod/.test(userAgent) && !window.MSStream) {
-                // window.location.href = appStoreUrl;
-                a = "mac"
+                window.alert("iPad -" + appStoreUrl);
+                window.location.href = appStoreUrl;
             } else {
+                window.alert("ELSE -" + playStoreUrl);
                 // Optionally handle other platforms or show a message
-                // window.location.href = playStoreUrl; // Fallback or choose accordingly
-                a = "else Play"
+                window.location.href = playStoreUrl; // Fallback or choose accordingly
             }
             console.log(a)
         }
 
-        redirectToAppStore()
         // console.log(redirectToAppStore)
         // Redirect as soon as the page loads
-        // window.onload = redirectToAppStore;
+        window.onload = redirectToAppStore;
     </script>
 </head>
 <body>
