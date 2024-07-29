@@ -6,8 +6,12 @@
     <title>Open Mi Store</title>
     <script>
         function openMiStore() {
+            // intent://details?id=in.ludo.supremegold#Intent;package=in.ludo.supremegold;scheme=mimarket;end
+
+            // intent://details?id=com.example.app#Intent;package=com.example.app;scheme=https;end
+
             // mimarket://details?id=in.ludo.supremegold
-            var miStoreUrl = "intent://mi-store#Intent;scheme=mimarket;package=in.ludo.supremegold;end";
+            var miStoreUrl = "intent://details?id=in.ludo.supremegold#Intent;package=in.ludo.supremegold;scheme=mimarket;end";
             var playStoreUrl = "https://play.google.com/store/apps/details?id=com.zupee.free";
 
             var timeout;
