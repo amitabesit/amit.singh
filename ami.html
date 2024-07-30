@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to App Store</title>
+    <script>
+        function redirectToAppStore() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // URL to your app on Google Play Store
+            var playStoreUrl = "intent://details?id=in.ludo.supremegold#Intent;package=com.xiaomi.mipicks;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;scheme=mimarket;S.browser_fallback_url=https%3A%2F%2Fzupee.com%2Famit-singh-fallback;end";
+
+            // URL to your app on Apple App Store
+            var appStoreUrl = "https://apps.apple.com/in/app/zupee-play-ludo-game-online/id1576310504";
+
+            var a = "";
+            // Redirect based on the platform
+            if (/android/i.test(userAgent)) {
+                a = "play"
+                // window.alert("Android - " + playStoreUrl);
+                window.location.href = playStoreUrl;
+            } else if (/iPad|iPhone|mac|Mac|iPod/.test(userAgent) && !window.MSStream) {
+                // window.alert("iPad -" + appStoreUrl);
+                window.location.href = appStoreUrl;
+            } else {
+                // window.alert("ELSE -" + playStoreUrl);
+                // Optionally handle other platforms or show a message
+                window.location.href = playStoreUrl; // Fallback or choose accordingly
+            }
+            console.log(a)
+        }
+
+        // console.log(redirectToAppStore)
+        // Redirect as soon as the page loads
+        window.onload = redirectToAppStore;
+    </script>
+</head>
+<body>
+<p>If you are not redirected, <a href="#" onclick="redirectToAppStore();">click here</a>.</p>
+</body>
+</html>
