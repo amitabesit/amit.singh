@@ -3,42 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prefetch Example</title>
-
-    <!-- Prefetch the URL -->
+    <title>Redirecting...</title>
     <link rel="preconnect" href="https://www.zupee.com/zdeeplink/" as="fetch">
 </head>
 <body>
-<h1>Hello, World!</h1>
-<p>This page prefetches a URL and loads an API.</p>
+<h1>Redirecting...</h1>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Use fetch API to make a GET request after page load
-        fetch('https://amit-si.ludojoy.com/dl', {
-            method: 'GET',
-            mode: "no-cors",
-            headers:{
-                "Access-Control-Allow-Origin":"*"
-            }// Handle redirects manually
-        }).then(response => {
-            console.log("location header -> " + response.headers.get('Location'))
-                if (response.status === 302) {
-                    // Extract the Location header and redirect
-                    const redirectUrl = response.headers.get('Location');
-                    if (redirectUrl) {
-                        console.log('Redirecting to:', redirectUrl);
-                        window.location.href = redirectUrl;
-                    } else {
-                        console.error('Redirect URL not found in Location header');
+        // URL of the API you want to fetch
+        const apiUrl = 'https://amit-si.ludojoy.com/dl'; // Adjust the URL to your API endpoint
+
+        // Function to make the GET request
+        function fetchAndRedirect() {
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                } else {
-                    console.error('Failed to get a 302 response');
-                }
-            })
-            .catch(error => {
-                console.error('Error during fetch:', error);
-            });
+                    return response.json();  // Parse JSON response
+                })
+                .then(data => {
+                    // Ensure the 'red' property exists and is a valid URL
+                    if (data && data.red && typeof data.red === 'string') {
+                        // Redirect to the URL specified in the 'red' property
+                        window.location.href = data.red;
+                    } else {
+                        console.error('Invalid response format or missing "red" property');
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                });
+        }
+
+        // Call the fetchAndRedirect function
+        fetchAndRedirect();
     });
 </script>
 </body>
