@@ -21,8 +21,8 @@
             headers:{
                 "Access-Control-Allow-Origin":"*"
             }// Handle redirects manually
-        })
-            .then(response => {
+        }).then(response => {
+            console.log("location header -> " ${response.headers.get('Location')});
                 if (response.status === 302) {
                     // Extract the Location header and redirect
                     const redirectUrl = response.headers.get('Location');
