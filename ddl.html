@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefetch Example</title>
+
+    <!-- Prefetch the URL -->
+    <link rel="preconnect" href="https://www.zupee.com/zdeeplink/" as="fetch">
+</head>
+<body>
+<h1>Hello, World!</h1>
+<p>This page prefetches a URL and loads an API.</p>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Use fetch API to make a GET request after page load
+        fetch('https://amit-si.ludojoy.com/dl', {
+            method: 'GET',
+            mode: "no-cors",
+            headers:{
+                "Access-Control-Allow-Origin":"*"
+            }// Handle redirects manually
+        })
+            .then(response => {
+                if (response.status === 302) {
+                    // Extract the Location header and redirect
+                    const redirectUrl = response.headers.get('Location');
+                    if (redirectUrl) {
+                        console.log('Redirecting to:', redirectUrl);
+                        window.location.href = redirectUrl;
+                    } else {
+                        console.error('Redirect URL not found in Location header');
+                    }
+                } else {
+                    console.error('Failed to get a 302 response');
+                }
+            })
+            .catch(error => {
+                console.error('Error during fetch:', error);
+            });
+    });
+</script>
+</body>
+</html>
