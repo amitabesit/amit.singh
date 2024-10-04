@@ -29,33 +29,24 @@
         // Function to make the GET request
         async function fetchApiAndParse() {
             try {
-                // Make the fetch request
-                const response = await fetch('https://a-stage.zupee.in/r');
+                const response = await fetch('https://a-stage.zupee.in/r', {
+                    method: 'GET',
+                    redirect: 'manual'  // Prevent automatic redirection
+                });
 
-                // Log the automatically added request headers
-                const requestHeaders = new Headers(response.headers);
-                console.log("Request Headers:");
-                for (const [key, value] of requestHeaders.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
+                if (response.status === 302) {
+                    const redirectUrl = response.headers.get('Location');
+                    console.log("Redirect URL:", redirectUrl);
 
-                // Check if the response is successful
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                // Parse the response as JSON
-                const data = await response.json();
-
-                // Check the status and handle the parsed data
-                if (data.status === "true") {
-                    console.log("Download URL:", data.r);
-                } else {
-                    console.log("Status was not true.");
+                    // Now, make a request to the redirect URL
+                    if (redirectUrl) {
+                        const redirectedResponse = await fetch(redirectUrl);
+                        const data = await redirectedResponse.json();
+                        console.log("Redirected Response Data:", data);
+                    }
                 }
             } catch (error) {
-                // Handle any errors that occur during the fetch
-                console.error("Error fetching or parsing data:", error);
+                console.error("Error fetching data:", error);
             }
         }
 
