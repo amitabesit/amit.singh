@@ -44,28 +44,37 @@
         // Function to make the GET request
         async function fetchApiAndParse() {
             try {
-                const response = await fetch('https://applinks.ludojoy.com/r', {
-                    method: 'GET',
-                    redirect: 'manual'  // Prevent automatic redirection
-                });
+                // Make the fetch request
+                const response = await fetch('https://applinks.ludojoy.com/r');
 
-                if (response.status === 302) {
-                    const redirectUrl = response.headers.get('Location');
-                    console.log("Redirect URL:", redirectUrl);
+                // Log the automatically added request headers
+                const requestHeaders = new Headers(response.headers);
+                console.log("Request Headers:");
+                for (const [key, value] of requestHeaders.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
 
-                    // Now, make a request to the redirect URL
-                    if (redirectUrl) {
-                        const redirectedResponse = await fetch(redirectUrl);
-                        const data = await redirectedResponse.json();
-                        console.log("Redirected Response Data:", data);
-                    }
+                // Check if the response is successful
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // Parse the response as JSON
+                const data = await response.json();
+
+                // Check the status and handle the parsed data
+                if (data.status === "true") {
+                    console.log("Download URL:", data.r);
+                } else {
+                    console.log("Status was not true.");
                 }
             } catch (error) {
-                console.error("Error fetching data:", error);
+                // Handle any errors that occur during the fetch
+                console.error("Error fetching or parsing data:", error);
             }
         }
 
-        // Call the fetchAndRedirect function
+        // Call the function
         fetchApiAndParse();
     });
 </script>
