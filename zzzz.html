@@ -3,9 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <!--    <link rel="preconnect" href="https://www.zupee.com/zdeeplink/">
-        <link rel="preconnect" href="https://amit-si.ludojoy.com/dl">-->
+    <title>Download APK</title>
+    <style>
+        /* Page background color */
+        body {
+            background-color: #FFEA00;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #3F0071;
+            text-align: center;
+        }
+
+        /* Text above the button */
+        .main-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* APK URL text */
+        .apk-url {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: none; /* Initially hidden */
+            color: #3F0071;
+            word-wrap: break-word;
+            width: 80%;
+        }
+
+        /* Button styling */
+        .download-button {
+            display: none; /* Initially hidden */
+            background-color: #3F0071;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .download-button:hover {
+            background-color: #2C0054;
+        }
+
+        /* Icon styling */
+        .download-icon {
+            font-size: 20px;
+        }
+    </style>
     <link rel="preconnect" href="https://a-stage.zupee.in">
     <link rel="preconnect" href="https://applinks.ludojoy.com">
 
@@ -36,23 +94,32 @@
   ect https://applinks.ludojoy.com;">
 </head>
 <body>
-<h1>Redirecting...</h1>
+
+<!-- Main Text -->
+<div class="main-text">
+    PLAY LUDO<br>
+    WIN UP TO ₹ 10 LAKH
+</div>
+
+<!-- APK URL Display -->
+<div id="apkUrl" class="apk-url"></div>
+
+<!-- Download button -->
+<button id="downloadButton" class="download-button">
+    <span class="download-icon">🗃️</span> <!-- Simple box icon -->
+    Download Now
+</button>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const downloadButton = document.getElementById('downloadButton');
+        const apkUrlDisplay = document.getElementById('apkUrl');
 
         // Function to make the GET request
         async function fetchApiAndParse() {
             try {
                 // Make the fetch request
-                const response = await fetch('https://applinks.ludojoy.com/r');
-
-                // Log the automatically added request headers
-                const requestHeaders = new Headers(response.headers);
-                console.log("Request Headers:");
-                for (const [key, value] of requestHeaders.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
+                const response = await fetch('https://a-stage.zupee.in/r');
 
                 // Check if the response is successful
                 if (!response.ok) {
@@ -64,7 +131,17 @@
 
                 // Check the status and handle the parsed data
                 if (data.status === "true") {
-                    console.log("Download URL:", data.r);
+                    // Display the APK URL as text
+                    apkUrlDisplay.textContent = data.r;
+                    apkUrlDisplay.style.display = 'block';
+
+                    // Set the button's onclick action to download the APK file
+                    downloadButton.onclick = () => {
+                        window.location.href = data.r;
+                    };
+
+                    // Show the download button
+                    downloadButton.style.display = 'flex';
                 } else {
                     console.log("Status was not true.");
                 }
@@ -74,7 +151,7 @@
             }
         }
 
-        // Call the function
+        // Initially call fetch to load data and enable the button
         fetchApiAndParse();
     });
 </script>
