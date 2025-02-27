@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go to Downloads</title>
+    <title>Open Downloads</title>
 </head>
 <body>
-    <button onclick="goToDownloads()">Go to Downloads</button>
+    <h2>Click the button to open Downloads</h2>
+    
+    <!-- Button to open Downloads using an Intent -->
+    <button onclick="openDownloads()">Go to Downloads</button>
+
+    <!-- Fallback link if button doesn't work -->
+    <p>If the button doesn't work, try <a href="intent://downloads/#Intent;action=android.intent.action.VIEW;end;">this link</a>.</p>
 
     <script>
-        function goToDownloads() {
-            window.location.href = "chrome://downloads";
+        function openDownloads() {
+            window.location.href = "intent://downloads/#Intent;action=android.intent.action.VIEW;end;";
         }
     </script>
 </body>
