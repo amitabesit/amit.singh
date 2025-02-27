@@ -7,16 +7,16 @@
 </head>
 <body>
     <h2>Click the button to open Downloads</h2>
-    
-    <!-- Button to open Downloads using an Intent -->
-    <button onclick="openDownloads()">Go to Downloads</button>
 
-    <!-- Fallback link if button doesn't work -->
-    <p>If the button doesn't work, try <a href="intent://downloads/#Intent;action=android.intent.action.VIEW;end;">this link</a>.</p>
+    <!-- Button to trigger the intent -->
+    <button onclick="openDownloadsApp()">Go to Downloads</button>
+
+    <!-- Fallback link in case the button doesn't work -->
+    <p>If the button doesn't work, try <a href="downloadsapp://open">this link</a>.</p>
 
     <script>
-        function openDownloads() {
-            window.location.href = "intent://downloads/#Intent;action=android.intent.action.VIEW;end;";
+        function openDownloadsApp() {
+            window.location.href = "downloadsapp://open";
         }
     </script>
 </body>
