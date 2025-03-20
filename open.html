@@ -61,7 +61,7 @@
             attempts++;
             console.log(`Attempt ${attempts}: Trying to open app...`);
 
-            window.location.href = "intent://#Intent;package=in.ludo.supremegold;end;";
+            window.location.href = "intent://#Intent;component=in.ludo.supremegold/in.cgames.core.splash.ui.SplashActivity;end;";
 
             if (attempts >= maxAttempts) {
                 clearInterval(retryInterval);
