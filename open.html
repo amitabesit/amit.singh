@@ -3,26 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open App Automatically</title>
-    <script>
-        function openApp() {
-            console.log("Trying to open the app...");
-
-            // Use intent scheme to open the app
-            window.location.href = "intent://#Intent;package=in.ludo.supremegold;end;";
-
-            // Retry every 4 seconds
-            setTimeout(openApp, 4000);
+    <title>Open Ludo Supreme Gold</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
         }
-
-        // Start the retry loop when the page loads
-        window.onload = function() {
-            openApp();
-        };
-    </script>
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
-    <h1>Trying to Open Ludo Supreme Gold</h1>
-    <p>If the app is installed, it should open automatically.</p>
+
+    <h1>Open Ludo Supreme Gold</h1>
+    <p>Click the button to open the app. If it's not installed, it will keep retrying.</p>
+
+    <button id="openAppBtn" onclick="startRetry()">Open App</button>
+    <button id="stopRetryBtn" onclick="stopRetry()" disabled>Stop Auto Retry</button>
+
+    <p id="status">Status: Waiting...</p>
+
+    <script>
+        let attempts = 0;
+        let maxAttempts = 5;
+        let retryInterval = null;
+
+        function startRetry() {
+            document.getElementById("openAppBtn").disabled = true;
+            document.getElementById("stopRetryBtn").disabled = false;
+            document.getElementById("status").innerText = "Status: Trying to open app...";
+
+            openApp();
+            retryInterval = setInterval(openApp, 4000); // Retry every 4 seconds
+        }
+
+        function stopRetry() {
+            clearInterval(retryInterval);
+            document.getElementById("openAppBtn").disabled = false;
+            document.getElementById("stopRetryBtn").disabled = true;
+            document.getElementById("status").innerText = "Status: Stopped retrying.";
+        }
+
+        function openApp() {
+            attempts++;
+            console.log(`Attempt ${attempts}: Trying to open app...`);
+
+            window.location.href = "intent://#Intent;package=in.ludo.supremegold;end;";
+
+            if (attempts >= maxAttempts) {
+                clearInterval(retryInterval);
+                document.getElementById("status").innerText = "Status: App not found, redirecting to Play Store...";
+                setTimeout(() => {
+                    window.location.href = "https://play.google.com/store/apps/details?id=in.ludo.supremegold";
+                }, 2000);
+            } else {
+                document.getElementById("status").innerText = `Status: Attempt ${attempts}...`;
+            }
+        }
+    </script>
+
 </body>
 </html>
