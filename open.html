@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open App Automatically</title>
+    <script>
+        function openApp() {
+            console.log("Trying to open the app...");
+
+            // Use intent scheme to open the app
+            window.location.href = "intent://#Intent;package=in.ludo.supremegold;end;";
+
+            // Retry every 4 seconds
+            setTimeout(openApp, 4000);
+        }
+
+        // Start the retry loop when the page loads
+        window.onload = function() {
+            openApp();
+        };
+    </script>
+</head>
+<body>
+    <h1>Trying to Open Ludo Supreme Gold</h1>
+    <p>If the app is installed, it should open automatically.</p>
+</body>
+</html>
